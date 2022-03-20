@@ -1,0 +1,48 @@
+﻿@model TradeBot.Models.ViewModels.SearchCandleViewModel
+
+@{
+    ViewData["Title"] = "GetCandles";
+}
+
+<h1>GetCandles</h1>
+
+<h4>Candle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="GetCandles" enctype="text/plain" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for=" CoinName" name="coinName" id="coinName" class="control-label"></label>
+                <input asp-for="CoinName"  class="form-control" />
+                <span asp-validation-for="CoinName" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="timeFrame" name="timeFrame" class="control-label"></label>
+                <input asp-for="timeFrame" class="form-control" />
+                <span asp-validation-for="timeFrame" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="from" name="from" class="control-label"></label>
+                <input asp-for="from" class="form-control" />
+                <span asp-validation-for="from" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="to" name="to"  class="control-label"></label>
+                <input asp-for="to" class="form-control" />
+                <span asp-validation-for="to" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
