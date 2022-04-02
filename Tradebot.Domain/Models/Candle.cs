@@ -1,8 +1,9 @@
 ﻿using Skender.Stock.Indicators;
 using System.ComponentModel.DataAnnotations;
-using TradeBot.Models.Enum;
+using Tradebot.Domain;
+using TradeBot.Domain.Models.Enum;
 
-namespace TradeBot.Models
+namespace TradeBot.Domain.Models
 {
     public class Candle
     {
@@ -21,7 +22,7 @@ namespace TradeBot.Models
 
         public ResolutionType Timeframe
         {
-            get { return (ResolutionType) timeframe; }
+            get { return (ResolutionType)timeframe; }
             set { timeframe = (int)value; }
         }
 
@@ -47,6 +48,10 @@ namespace TradeBot.Models
             this.Timeframe = timeFrame;
             this.v = v;
         }
+
+        public bool IsExpired() =>
+            DateTime.Now.Subtract(DateTime).TotalMinutes > Resolution.ResolutionsInMinute[Timeframe] ? true : false;
+
 
         public static implicit operator Quote(Candle candle)
         {

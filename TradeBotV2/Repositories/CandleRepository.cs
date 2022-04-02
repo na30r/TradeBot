@@ -77,23 +77,28 @@ namespace TradeBot.Repositories
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionBuilder.UseSqlServer("Server=.; Initial Catalog=TradeBot; Integrated Security=True");
             using ApplicationDbContext ctx = new ApplicationDbContext(optionBuilder.Options);
-            var candles = ctx.Candles
+            var candles = _context.Candles
                 .Where(a=>a.DateTime > from && a.DateTime<to && a.CoinName == (int) cryptoType)
                 .Where(a=>a.Time % Resolution.ResolutionTimeDifference[resolution] == 0)
                 .ToList();
             return candles;
         }
-
-        //This method runs at the start of the application once only as FinalTest was set as Singleton in services
-        public Task StartAsync(CancellationToken cancellationToken)
+        public bool IsSync(Candle lastCandle)
         {
-            return Task.CompletedTask;
+            if (DateTime.Now.Subtract(lastCandle.DateTime) < TimeSpan.FromMinutes(30))
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
 
-        //--------shutdown operations---------//
-        public Task StopAsync(CancellationToken cancellationToken)
+
+        public Candle GetLastCandle(CryptoType cryptoName)
         {
-            return Task.CompletedTask;
+           var candle = _context.Candles.Where(a => a.CoinName == (int)cryptoName).OrderByDescending(a => a.DateTime).FirstOrDefault();
+           return candle;
         }
 
 

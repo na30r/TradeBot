@@ -1,4 +1,4 @@
-﻿namespace TradeBot.Models.Enum
+﻿namespace TradeBot.Domain.Models.Enum
 {
     public static class Resolution
     {
@@ -12,6 +12,18 @@
             {ResolutionType._15min, "15" },
             {ResolutionType._5min, "5" },
             {ResolutionType._1min, "1" }
+
+        };
+        public static readonly Dictionary<ResolutionType, int> ResolutionsInMinute = new Dictionary<ResolutionType, int>()
+        {
+            {ResolutionType.Monthly, 60*24*30 },
+            {ResolutionType.Weekly, 60*24*7 },
+            {ResolutionType.Daily, 60*24 },
+            {ResolutionType._1h, 60 },
+            {ResolutionType._30min, 30 },
+            {ResolutionType._15min, 15 },
+            {ResolutionType._5min, 5 },
+            {ResolutionType._1min, 1 }
 
         };
 

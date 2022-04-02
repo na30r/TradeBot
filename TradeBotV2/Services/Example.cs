@@ -38,12 +38,13 @@ namespace TradeBot.Services
             var difference = (startingTime - now);
             _SMSProvider.AlertString($"برنامه ریزی برای {difference.TotalMinutes} دقیقه دیگر");
             var x = difference.TotalMilliseconds;
-
+          //  Thread.Sleep((int)x);
+            Thread.Sleep( 5000);
             // Create a timer and set a two second interval.
             aTimer = new System.Timers.Timer();
             //  aTimer.Interval = x;
 
-            aTimer.Interval = 10000;
+            aTimer.Interval = 1 * 60 * 1000;
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += timerTest.SendStartMessage;
 

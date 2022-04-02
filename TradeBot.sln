@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeBot", "TradeBot\TradeBot.csproj", "{CAC7CA60-942F-4187-B612-588F1C1EE150}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeBotV2", "TradeBotV2\TradeBotV2.csproj", "{D4D61E96-0D5E-49C5-8EB2-851F0AF7E061}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeBotV2", "TradeBotV2\TradeBotV2.csproj", "{D4D61E96-0D5E-49C5-8EB2-851F0AF7E061}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tradebot.Domain", "Tradebot.Domain\Tradebot.Domain.csproj", "{1E804896-0E69-4815-9549-A2ACE2430FA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D4D61E96-0D5E-49C5-8EB2-851F0AF7E061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4D61E96-0D5E-49C5-8EB2-851F0AF7E061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4D61E96-0D5E-49C5-8EB2-851F0AF7E061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E804896-0E69-4815-9549-A2ACE2430FA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E804896-0E69-4815-9549-A2ACE2430FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E804896-0E69-4815-9549-A2ACE2430FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E804896-0E69-4815-9549-A2ACE2430FA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

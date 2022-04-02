@@ -8,6 +8,8 @@ using TradeBot.Services;
 using TradeBotV2.Repositories;
 using Quartz.Logging;
 using TradeBotV2;
+using Quartz.Spi;
+using TradeBotV2.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,16 +23,28 @@ builder.Services.AddScoped<CandleRepository, CandleRepository>();
 builder.Services.AddScoped<GhasedakSMSProvider, GhasedakSMSProvider>();
 builder.Services.AddScoped<timerTest, timerTest>();
 builder.Services.AddScoped<SkenderIndicators, SkenderIndicators>();
+builder.Services.AddScoped<HelloJob, HelloJob>();
+builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();
+builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 
+builder.Services.AddSingleton<RemoveCartJob>();
+builder.Services.AddSingleton(new JobSchedule(jobType: typeof(RemoveCartJob), cronExpression:
+    "0 1/30 * * * ?" // 30 min yebar az daghighe 1 shuru mishe 
+    //"15 * * * * ?" // har daghighe az sanie 15 shuru 
+));
+builder.Services.AddHostedService<QuartzHostedService>();
 var app = builder.Build();
 
 
-//using (ServiceProvider serviceProvider = builder.Services.BuildServiceProvider())
-//{
-//    var skenderIndicators = serviceProvider.GetRequiredService<SkenderIndicators>();
-//    skenderIndicators.test(CryptoType.Ada, ResolutionType._30min, DateTime.Now.AddDays(-2), DateTime.Now);
+using (ServiceProvider serviceProvider = builder.Services.BuildServiceProvider())
+{
+    var finehubCrypoApi = serviceProvider.GetRequiredService<FinehubCrypoApi>();
+    var skenderIndicators = serviceProvider.GetRequiredService<SkenderIndicators>();
+    finehubCrypoApi.SyncMarketData(new List<CryptoType> { CryptoType.btc, CryptoType.Ada });
+    skenderIndicators.StochStrategy30min(CryptoType.Ada,  DateTime.Now.AddDays(-1), DateTime.Now);
+    skenderIndicators.StochStrategy30min(CryptoType.btc, DateTime.Now.AddDays(-1), DateTime.Now);
 
-//}
+}
 
 // Configure the HTTP request pipeline.
 //if (!app.Environment.IsDevelopment())
@@ -40,38 +54,40 @@ var app = builder.Build();
 //    app.UseHsts();
 //}
 
-//Example.Starter(_timertest, _smsProvider);
+
 
 
 //quartz
-LogProvider.SetCurrentLogProvider(new ConsoleLogProvider());
+//LogProvider.SetCurrentLogProvider(new ConsoleLogProvider());
 
 // Grab the Scheduler instance from the Factory
-StdSchedulerFactory factory = new StdSchedulerFactory();
-IScheduler scheduler = await factory.GetScheduler();
+//StdSchedulerFactory factory = new StdSchedulerFactory();
+//IScheduler scheduler = await factory.GetScheduler();
 
-// and start it off
-await scheduler.Start();
+//// and start it off
+//await scheduler.Start();
 
 // define the job and tie it to our HelloJob class
-IJobDetail job = JobBuilder.Create<HelloJob>()
-    .WithIdentity("job1", "group1")
-    .Build();
-
-ITrigger trigger = TriggerBuilder.Create()
-    .WithIdentity("trigger3", "group1")
-    .WithCronSchedule("0 1/30 * * * ?")
-    .ForJob(job)
-    .Build();
+//IJobDetail job = JobBuilder.Create<HelloJob>()
+//    .WithIdentity("job1", "group1")
+//    .Build();
 
 //ITrigger trigger = TriggerBuilder.Create()
-//    .WithIdentity("trigger1", "group1")
-//        .WithCronSchedule("*/53 * * * *")
+//    .WithIdentity("trigger3", "group1")
+//    .WithCronSchedule("0 58/1 * * * ?")
 //    .ForJob(job)
 //    .Build();
 
+//ITrigger trigger = TriggerBuilder.Create()
+//    .WithIdentity("trigger1", "group1")
+//    .StartNow()
+//    .WithSimpleSchedule(x => x
+//        .WithIntervalInSeconds(30)
+//        .RepeatForever())
+//    .Build();
+
 // Tell quartz to schedule the job using our trigger
-await scheduler.ScheduleJob(job, trigger);
+//await scheduler.ScheduleJob(job, trigger);
 
 // some sleep to show what's happening
 //await Task.Delay(TimeSpan.FromSeconds(60));

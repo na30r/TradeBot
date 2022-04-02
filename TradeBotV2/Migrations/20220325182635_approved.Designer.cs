@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TradeBot.Models;
 
@@ -11,9 +12,10 @@ using TradeBot.Models;
 namespace TradeBot.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220325182635_approved")]
+    partial class approved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,6 @@ namespace TradeBot.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("Time")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Timeframe")
                         .HasColumnType("int");
 
                     b.Property<double>("v")

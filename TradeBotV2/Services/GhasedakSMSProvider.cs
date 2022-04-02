@@ -26,11 +26,16 @@ namespace TradeBot.Services
         }
         public void AlertString(string alert)
         {
-            var sms = new Ghasedak.Core.Api(_ghasedakApiKey);
-            ContentBuilder contentBuilder = new();
-            var x = sms.SendSMSAsync(alert, _myPhoneNumber, _ghasedakLineNumber).Result;
+            try
+            {
+                var sms = new Ghasedak.Core.Api(_ghasedakApiKey);
+                ContentBuilder contentBuilder = new();
+                var x = sms.SendSMSAsync(alert, _myPhoneNumber, _ghasedakLineNumber).Result;
+            }
+            catch (Exception e)
+            {
 
-            var s = x;
+            }
         }
 
     }

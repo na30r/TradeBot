@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using TradeBot.Models.Enum;
-using TradeBotV2.Models;
+using TradeBot.Domain.Models.Enum;
+using TradeBot.Domain.Models;
 
-namespace TradeBot.Models
+namespace TradeBot.Domain.Models
 {
     public class ApplicationDbContext : DbContext
     {

@@ -22,14 +22,17 @@ namespace TradeBot.Services
         {
             var s = _fineHub.GetPrice30Min(TradeBot.Models.Enum.CryptoType.Ada);
             var sd = _fineHub.GetPrice30Min(TradeBot.Models.Enum.CryptoType.btc);
-            _skenderIndicators.test(CryptoType.btc, ResolutionType._30min, DateTime.Now.AddDays(-2), DateTime.Now);
-            _skenderIndicators.test(CryptoType.Ada, ResolutionType._30min, DateTime.Now.AddDays(-2), DateTime.Now);
+            _skenderIndicators.StochStrategy30min(CryptoType.btc, DateTime.Now.AddDays(-2), DateTime.Now);
+            _skenderIndicators.StochStrategy30min(CryptoType.Ada, DateTime.Now.AddDays(-2), DateTime.Now);
         }
 
         public void SendStartMessage(Object source, System.Timers.ElapsedEventArgs e)
         {
             _smsProvider.AlertString("اپ وزین ترید استارت خورد .");
-            Example.Fire(OnTimedEvent);
+            //var s = _fineHub.GetPrice30Min(TradeBot.Models.Enum.CryptoType.Ada);
+            //var sd = _fineHub.GetPrice30Min(TradeBot.Models.Enum.CryptoType.btc);
+            //_skenderIndicators.test(CryptoType.btc, ResolutionType._30min, DateTime.Now.AddDays(-2), DateTime.Now);
+            //_skenderIndicators.test(CryptoType.Ada, ResolutionType._30min, DateTime.Now.AddDays(-2), DateTime.Now);
         }
     }
 }

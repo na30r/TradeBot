@@ -18,7 +18,7 @@ namespace TradeBot.Services
         public void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
             var s = formMain.GetPrice30Min(TradeBot.Models.Enum.CryptoType.Ada);
-            SkenderIndicators.test(CryptoType.Ada, ResolutionType._30min, DateTime.Now.AddDays(-1), DateTime.Now);
+            SkenderIndicators.StochStrategy30min(CryptoType.Ada, DateTime.Now.AddDays(-1), DateTime.Now);
         }
 
     }

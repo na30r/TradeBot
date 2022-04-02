@@ -13,7 +13,7 @@ namespace TradeBotV2
             {
                 if (level >= LogLevel.Info && func != null)
                 {
-                    Console.WriteLine("[" + DateTime.Now.ToLongTimeString() + "] [" + level + "] " + func(), parameters);
+                        Console.WriteLine("[" + DateTime.Now.ToLongTimeString() + "] [" + level + "] " + func(), parameters);
                 }
                 return true;
             };

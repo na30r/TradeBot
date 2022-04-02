@@ -1,4 +1,4 @@
-﻿namespace TradeBot.Models
+﻿namespace TradeBot.Domain.Models
 {
     public class FinehubCandle
     {
