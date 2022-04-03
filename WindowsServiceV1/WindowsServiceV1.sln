@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsServiceV1", "WindowsServiceV1\WindowsServiceV1.csproj", "{2E8E115C-7EE5-4F23-9D85-C0ECC8FF67EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tradebot.Domain", "..\TradeBot\Tradebot.Domain\Tradebot.Domain.csproj", "{13BB8C65-9BC5-431F-BADE-5F875688DB4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E8E115C-7EE5-4F23-9D85-C0ECC8FF67EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E8E115C-7EE5-4F23-9D85-C0ECC8FF67EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E8E115C-7EE5-4F23-9D85-C0ECC8FF67EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E8E115C-7EE5-4F23-9D85-C0ECC8FF67EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13BB8C65-9BC5-431F-BADE-5F875688DB4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13BB8C65-9BC5-431F-BADE-5F875688DB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13BB8C65-9BC5-431F-BADE-5F875688DB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13BB8C65-9BC5-431F-BADE-5F875688DB4F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3B73E49-E335-4544-8EB3-E8880A1DE7FE}
+	EndGlobalSection
+EndGlobal
