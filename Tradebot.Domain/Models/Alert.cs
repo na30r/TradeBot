@@ -8,7 +8,8 @@ namespace TradeBot.Domain.Models
         public CryptoType CryptoName { get; set; }
         public DateTime Date { get; set; }
         public SignalType SignalType { get; set; }
-        public TimeFrame TimeFrame { get; set; }
+        public ResolutionType TimeFrame { get; set; }
+        public Strategy Strategy { get; set; }
         public bool Result { get; set; }
     }
  

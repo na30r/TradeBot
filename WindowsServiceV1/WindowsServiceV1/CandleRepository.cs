@@ -4,6 +4,7 @@ using TradeBot.Domain.Models;
 using TradeBot.Domain.Models.Enum;
 using TradeBot.Domain;
 using static System.Net.Mime.MediaTypeNames;
+using Tradebot.Data;
 
 namespace WindowsServiceV1
 {

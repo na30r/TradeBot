@@ -7,7 +7,6 @@ namespace TradeBot.Domain.Models
 {
     public class Candle
     {
-
         [Key]
         public int ID { get; set; }
         public int CoinName { get; set; }
@@ -18,7 +17,7 @@ namespace TradeBot.Domain.Models
         public int Time { get; set; }
         public double v { get; set; }
 
-        private int timeframe;
+        protected int timeframe;
 
         public ResolutionType Timeframe
         {
@@ -65,5 +64,83 @@ namespace TradeBot.Domain.Models
                 Volume = (decimal)candle.v
             };
         }
+
+
+    }
+
+    public class CandlePosition : Candle
+    {
+        public SignalType? SignalType { get; set; }
+
+        public double? BuyPrice { get; set; }
+        public double? SellPrice { get; set; }
+        public double? TPPrice { get; set; }
+        public double? SLPrice { get; set; }
+
+        public Strategy SignalStrategy { get; set; }
+        public Strategy TPStrategy { get; set; }
+        public Strategy SLStrategy { get; set; }
+
+        public float ROE { get; set; }
+
+        public CandlePosition(Candle candle)
+        {
+            this.ID = candle.ID;
+            this.CoinName = candle.CoinName;
+            this.DateTime = candle.DateTime;
+            this.High = candle.High;
+            this.Low = candle.Low;
+            this.Open = candle.Open;
+            this.Close = candle.Close;
+            this.Time = candle.Time;
+            this.v = candle.v;
+            this.Timeframe = candle.Timeframe;
+            this.Approved = candle.Approved;
+        }
+
+        public bool IsTPHitted()
+        {
+            if (TPPrice == null)
+            {
+                return false;
+            }
+            if (TPPrice < Close || TPPrice < High)
+                return true;
+            return false;
+        }
+
+        public void SetTP(double? value , Strategy tPStrategy )
+        {
+            if (value != null && value != 0)
+            {
+                TPPrice = value;
+                TPStrategy = tPStrategy; 
+            }
+        }
+
+        public void ClosePosition()
+        {
+            throw new NotImplementedException();
+        }
+
+        public CandlePosition(CryptoType coinName, double high, double low, double open, double close, int time, double v, ResolutionType timeFrame)
+        {
+            CoinName = (int)coinName;
+            High = high;
+            Low = low;
+            Open = open;
+            Close = close;
+            Time = time;
+            DateTime = time.UnixTimeStampToDateTime();
+            Approved = false;
+            this.Timeframe = timeFrame;
+            this.v = v;
+        }
+        public void AvoidPosotion() {
+            SignalType = null;
+            SignalStrategy = 0;
+            BuyPrice = null;
+        }
+
     }
 }

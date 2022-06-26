@@ -2,6 +2,6 @@
 {
     public interface INotificationService
     {
-        void Alert(string content);
+        void  Alert(string content);
     }
 }

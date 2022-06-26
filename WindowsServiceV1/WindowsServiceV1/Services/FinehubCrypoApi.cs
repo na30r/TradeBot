@@ -33,9 +33,12 @@ namespace WindowsServiceV1.Services
             {
                 from = notApprovedList.LastOrDefault().DateTime;
             }
-            if (!_candleRepository.GetLastCandle(coinName, timeFrame).IsExpired())
+            if (_candleRepository.GetLastCandle(coinName, timeFrame) != null)
             {
-                return true;
+                if (!_candleRepository.GetLastCandle(coinName, timeFrame).IsExpired())
+                {
+                    return false;
+                }
             }
             var candles = new List<Candle>();
             try
@@ -89,6 +92,42 @@ namespace WindowsServiceV1.Services
             return GetPrice(coinName, ResolutionType._30min, DateTime.Now.AddMinutes(-90), DateTime.Now);
         }
 
+        // in rahe hal dorost nist
+        public bool GetPrice30Min(CryptoType coinName, Func<List<Candle>, CryptoType, List<CandlePosition>> func)
+        {
+            var res = GetPrice(coinName, ResolutionType._30min, DateTime.Now.AddMinutes(-90), DateTime.Now);
+            var candles = _candleRepository.GetCandles(coinName, ResolutionType._30min, DateTime.Now.AddDays(-2), DateTime.Now).ToList();
+            if (res == true)
+            {
+                func(candles, coinName);
+            }
+            return true;
+        }
+        public bool GetPrice30Min(List<CryptoType> coinNames, Func<List<Candle>,CryptoType, List<CandlePosition>> action)
+        {
+            foreach (var coinName in coinNames)
+            {
+                var res = GetPrice30Min(coinName, action);
+            }
+            return true;
+        }
+        public bool GetPrice1Hour(CryptoType coinName, Func<List<Candle>,CryptoType, List<CandlePosition>> action)
+        {
+            var res = GetPrice(coinName, ResolutionType._1h, DateTime.Now.AddHours(-8), DateTime.Now);
+            var candles = _candleRepository.GetCandles(coinName, ResolutionType._1h, DateTime.Now.AddDays(-2), DateTime.Now).ToList();
+            if (res == true) action(candles, coinName);
+            return true;
+        }
+
+        public bool GetPrice1Hour(List<CryptoType> coinNames, Func<List<Candle>,CryptoType, List<CandlePosition>> action)
+        {
+            foreach (var coinName in coinNames)
+            {
+                var res = GetPrice1Hour(coinName, action);
+            }
+            return true;
+        }
+
         public bool GetPrice5Min(CryptoType coinName, int? delay)
         {
             return GetPrice(coinName, ResolutionType._5min, DateTime.Now.AddMinutes(-30), DateTime.Now);
@@ -105,7 +144,6 @@ namespace WindowsServiceV1.Services
             {
                 foreach (var crypto in cryptos)
                 {
-                    Helper.LogTofile("2");
                     var lastCandle30min = _candleRepository.GetLastApprovedCandle(crypto, ResolutionType._30min);
                     var lastCandle1H = _candleRepository.GetLastApprovedCandle(crypto, ResolutionType._1h);
                     if (lastCandle30min == null)
