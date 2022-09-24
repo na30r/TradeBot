@@ -4,14 +4,14 @@ using WindowsServiceV1;
 
 namespace WindowsServiceV1
 {
-    public class ContentBuilder
-    {
+    //public class ContentBuilder
+    //{
 
-        public StringBuilder MessageBuilder(Alert alert)
-        {
-            StringBuilder stringBuilder = new();
-            stringBuilder.Append($" هشدار خرید {alert.CryptoName.ToString()} در تایم فریم {alert.TimeFrame.GetDescription()} ");
-            return stringBuilder;
-        }
-    }
+    //    public StringBuilder MessageBuilder(Alert alert)
+    //    {
+    //        StringBuilder stringBuilder = new();
+    //        stringBuilder.Append($" هشدار خرید {alert.CryptoName.ToString()} در تایم فریم {alert.TimeFrame.GetDescription()} ");
+    //        return stringBuilder;
+    //    }
+    //}
 }

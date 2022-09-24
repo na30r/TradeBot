@@ -23,8 +23,8 @@ var exitCode = HostFactory.Run(x =>
       s.WhenStopped(a => a.Stop());
   });
     x.RunAsLocalSystem();
-    x.SetServiceName("NasirV13");
-    x.SetDisplayName("NasirV13");
+    x.SetServiceName("NasirV14");
+    x.SetDisplayName("NasirV14");
 });
 //using IHost host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
 //    .ConfigureServices(services =>

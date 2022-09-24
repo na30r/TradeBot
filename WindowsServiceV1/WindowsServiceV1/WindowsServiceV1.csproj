@@ -19,7 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\TradebotAngular\Tradebot.Application\Tradebot.Application.csproj" />
     <ProjectReference Include="..\..\..\TradebotAngular\Tradebot.Data\Tradebot.Data.csproj" />
+    <ProjectReference Include="..\..\..\TradebotAngular\Tradebot.Setting\Tradebot.Setting.csproj" />
     <ProjectReference Include="..\..\Tradebot.Domain\Tradebot.Domain.csproj" />
   </ItemGroup>
 
